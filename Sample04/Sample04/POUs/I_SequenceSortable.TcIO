@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_SequenceSortable" Id="{e42471ab-65c7-4751-90d1-e0e6893cdf0a}">
+    <Declaration><![CDATA[INTERFACE I_SequenceSortable EXTENDS __SYSTEM.IQueryInterface]]></Declaration>
+    <Method Name="SortList" Id="{778c45a4-5710-4bc9-bff9-0f763daf6d63}">
+      <Declaration><![CDATA[METHOD SortList
+VAR_INPUT
+	refSequence			: REFERENCE TO ARRAY [1..5] OF ST_SequenceItem;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

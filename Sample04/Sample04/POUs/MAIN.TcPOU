@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{7d9be255-3f1c-49bd-867b-853537a114e9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbSequenceManager						: FB_SequenceManager;
+	fbSequenceSortedByIdAscending			: FB_SequenceSortedByIdAscending;
+	fbSequenceSortedByValueAscending		: FB_SequenceSortedByValueAscending;
+	fbSequenceSortedByDurationAscending		: FB_SequenceSortedByDurationAscending;
+	fbSequenceSortedByIdDescending			: FB_SequenceSortedByIdDescending;
+	fbSequenceSortedByValueDescending		: FB_SequenceSortedByValueDescending;
+	fbSequenceSortedByDurationDescending	: FB_SequenceSortedByDurationDescending;
+	nTest									: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (nTest = 1) THEN
+	fbSequenceManager.Sort(fbSequenceSortedByIdAscending);
+	nTest := 0;
+ELSIF (nTest = 2) THEN
+	fbSequenceManager.Sort(fbSequenceSortedByValueAscending);
+	nTest := 0;
+ELSIF (nTest = 3) THEN
+	fbSequenceManager.Sort(fbSequenceSortedByDurationAscending);
+	nTest := 0;
+ELSIF (nTest = 4) THEN
+	fbSequenceManager.Sort(fbSequenceSortedByIdDescending);
+	nTest := 0;
+ELSIF (nTest = 5) THEN
+	fbSequenceManager.Sort(fbSequenceSortedByValueDescending);
+	nTest := 0;
+ELSIF (nTest = 6) THEN
+	fbSequenceManager.Sort(fbSequenceSortedByDurationDescending);
+	nTest := 0;
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

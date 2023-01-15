@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SequenceManager" Id="{6ef372b4-90a4-4df7-91a7-779bef7c6909}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_SequenceManager
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	// backing variable
+	_aSequence	: ARRAY [1..5] OF ST_SequenceItem := [(nId := 1, nValue := 50, nDuration := 20),
+													  (nId := 2, nValue := 10, nDuration := 30),
+													  (nId := 3, nValue := 23, nDuration := 10),
+													  (nId := 4, nValue := 65, nDuration := 200),
+													  (nId := 5, nValue := 45, nDuration := 75)];
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="aSequence" Id="{4b69ab57-f619-43fa-92ca-6eda8ce95378}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'variable'}
+PROPERTY PUBLIC aSequence : ARRAY [1..5] OF ST_SequenceItem]]></Declaration>
+      <Get Name="Get" Id="{c31cb622-3210-4834-8cb4-b0dae0a10376}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[aSequence := _aSequence;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Sort" Id="{1f1e3d96-09bc-4fa0-a4c6-d0ed1a621959}">
+      <Declaration><![CDATA[METHOD PUBLIC Sort
+VAR_INPUT
+	ipSequenceSortable		: I_SequenceSortable;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (ipSequenceSortable <> 0) THEN
+	ipSequenceSortable.SortList(THIS^._aSequence);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

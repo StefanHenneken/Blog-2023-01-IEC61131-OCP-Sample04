@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SequenceSortedByIdAscending" Id="{42e5b3f7-b4c1-4e77-8dfa-9b0833354bc2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_SequenceSortedByIdAscending IMPLEMENTS I_SequenceSortable
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="SortList" Id="{aca9ac80-09aa-43bc-8268-c5450b186dec}">
+      <Declaration><![CDATA[METHOD SortList
+VAR_INPUT
+	refSequence			: REFERENCE TO ARRAY [1..5] OF ST_SequenceItem;
+END_VAR
+VAR
+	stLeft, stRight		: ST_SequenceItem;
+	nMax, nIndex		: INT;
+	bSwapped			: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[REPEAT
+	bSwapped := FALSE;
+	FOR nIndex := 1 TO 4 DO
+		stLeft := refSequence[nIndex];
+		stRight := refSequence[nIndex + 1];
+		IF (stLeft.nId > stRight.nId ) THEN
+			refSequence[nIndex + 1] := stLeft;
+			refSequence[nIndex] := stRight;
+			bSwapped := TRUE;
+		END_IF
+	END_FOR
+UNTIL
+	bSwapped = FALSE
+END_REPEAT;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
